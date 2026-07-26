@@ -1,0 +1,26 @@
+[
+  {
+    "number": "01",
+    "category": "AI · Desktop Assistant",
+    "title": "R.A.V.A.N.A.",
+    "description": "An AI desktop voice assistant rebuilt from the ground up with a glassmorphic UI redesign, wake-word-free activation, and a goodbye-triggered shutdown flow.",
+    "tags": ["Python", "CustomTkinter", "Speech Recognition", "Gemini API"],
+    "link": "https://github.com/Jeevan2401/ravana-ai-asistant"
+  },
+  {
+    "number": "02",
+    "category": "ML · Fake News Detection",
+    "title": "TruthLens",
+    "description": "A fake news detection system trained on ~54,000 articles, shipped with a Chrome extension for in-browser checks and packaged with Docker for easy deployment.",
+    "tags": ["Flask", "scikit-learn", "Chrome Extension", "Docker"],
+    "link": "https://github.com/Jeevan2401/truthlens-fake-news-detector"
+  },
+  {
+    "number": "03",
+    "category": "Computer Vision · Wellbeing",
+    "title": "Guardian — Doomscroll Detector",
+    "description": "A computer vision tool that detects doomscrolling and phone-in-hand behavior in real time, nudging users to put the phone down and refocus.",
+    "tags": ["Python", "MediaPipe", "OpenCV"],
+    "link": "https://github.com/Jeevan2401/doomscroll-detector"
+  }
+]

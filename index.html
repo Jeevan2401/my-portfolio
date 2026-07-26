@@ -554,49 +554,8 @@
 <section id="projects">
   <p class="section-label reveal">02 — Projects</p>
   <h2 class="section-title reveal">SELECTED<br>WORK.</h2>
-  <div class="projects-grid">
-
-    <div class="project-card reveal">
-      <div class="project-num">01</div>
-      <span class="project-tag">AI · Desktop Assistant</span>
-      <h3 class="project-name">R.A.V.A.N.A.</h3>
-      <p class="project-desc">An AI desktop voice assistant rebuilt from the ground up with a glassmorphic UI redesign, wake-word-free activation, and a goodbye-triggered shutdown flow.</p>
-      <div class="project-stack">
-        <span class="stack-item">Python</span>
-        <span class="stack-item">CustomTkinter</span>
-        <span class="stack-item">Speech Recognition</span>
-        <span class="stack-item">Gemini API</span>
-      </div>
-      <a href="https://github.com/Jeevan2401/ravana-ai-asistant" class="project-link" target="_blank" rel="noopener">View Project</a>
-    </div>
-
-    <div class="project-card reveal">
-      <div class="project-num">02</div>
-      <span class="project-tag">ML · Fake News Detection</span>
-      <h3 class="project-name">TruthLens</h3>
-      <p class="project-desc">A fake news detection system trained on ~54,000 articles, shipped with a Chrome extension for in-browser checks and packaged with Docker for easy deployment.</p>
-      <div class="project-stack">
-        <span class="stack-item">Flask</span>
-        <span class="stack-item">scikit-learn</span>
-        <span class="stack-item">Chrome Extension</span>
-        <span class="stack-item">Docker</span>
-      </div>
-      <a href="https://github.com/Jeevan2401/truthlens-fake-news-detector" class="project-link" target="_blank" rel="noopener">View Project</a>
-    </div>
-
-    <div class="project-card reveal">
-      <div class="project-num">03</div>
-      <span class="project-tag">Computer Vision · Wellbeing</span>
-      <h3 class="project-name">Guardian — Doomscroll Detector</h3>
-      <p class="project-desc">A computer vision tool that detects doomscrolling and phone-in-hand behavior in real time, nudging users to put the phone down and refocus.</p>
-      <div class="project-stack">
-        <span class="stack-item">Python</span>
-        <span class="stack-item">MediaPipe</span>
-        <span class="stack-item">OpenCV</span>
-      </div>
-      <a href="https://github.com/Jeevan2401/doomscroll-detector" class="project-link" target="_blank" rel="noopener">View Project</a>
-    </div>
-
+  <div class="projects-grid" id="projects-container">
+    <!-- Project cards are injected dynamically from projects.json by render-projects.js -->
   </div>
 </section>
 
@@ -616,8 +575,8 @@
     <div class="timeline-item">
       <p class="exp-date">2026</p>
       <h3 class="exp-role">Full Stack Development Intern</h3>
-      <p class="exp-company">NoviTech R&D Pvt. Ltd. · Coimbatore ·Guide: Dr. D. Bhuvaneswari</p>
-      <p class="exp-desc">Structured full-stack internship building real project deliverables end-to-end, working directly with a supervisor on milestones, documentation, and shipped tasks.</p>
+      <p class="exp-company">NoviTech R&D Pvt. Ltd. · Coimbatore · Supervisor: Dr. D. Bhuvaneswari</p>
+      <p class="exp-desc">Structured full-stack internship (ID: FSDINU370) building real project deliverables end-to-end, working directly with a supervisor on milestones, documentation, and shipped tasks.</p>
     </div>
 
     <div class="timeline-item">
@@ -652,7 +611,7 @@
   <div class="social-links">
     <a href="https://github.com/Jeevan2401/Jeevan-G" class="social-link">GitHub</a>
     <a href="https://linkedin.com/in/jeevan-g-42a264373" class="social-link" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="./Jeevan_Resume.pdf" target="_blank" rel="noopener" class="social-link">Resume ↓</a>
+    <a href="./Jeevan_Resume.docx" download="Jeevan_Resume.pdf" class="social-link">Resume ↓</a>
   </div>
 </section>
 
@@ -714,11 +673,6 @@
 
   document.querySelectorAll('.reveal, .timeline-item').forEach(el => observer.observe(el));
 
-  // Stagger project cards
-  document.querySelectorAll('.project-card').forEach((card, i) => {
-    card.style.transitionDelay = (i * 0.1) + 's';
-  });
-
   // 3D tilt effect — project cards & status card
   function apply3DTilt(el, maxTilt = 10, scale = 1.02) {
     el.addEventListener('mousemove', (e) => {
@@ -741,9 +695,18 @@
     });
   }
 
-  document.querySelectorAll('.project-card').forEach(card => apply3DTilt(card, 6, 1.01));
   const statusCard = document.querySelector('.status-card');
   if (statusCard) apply3DTilt(statusCard, 10, 1.02);
+
+  // Called by render-projects.js once project cards are injected from projects.json
+  window.initProjectCards = function () {
+    const cards = document.querySelectorAll('.project-card');
+    cards.forEach((card, i) => {
+      card.style.transitionDelay = (i * 0.1) + 's';
+      observer.observe(card);
+      apply3DTilt(card, 6, 1.01);
+    });
+  };
 
   // Parallax hero grid on mouse move
   const heroGridBg = document.querySelector('.hero-grid-bg');
@@ -757,5 +720,6 @@
     });
   }
 </script>
+<script src="render-projects.js" defer></script>
 </body>
 </html>
