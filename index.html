@@ -63,6 +63,12 @@
   }
   body:hover #cursor { opacity: 1; }
 
+  /* Disable custom cursor on touch devices — no mouse, no need for it */
+  @media (hover: none) and (pointer: coarse) {
+    body { cursor: auto; }
+    #cursor, #cursor-ring { display: none !important; }
+  }
+
   /* Noise overlay */
   body::before {
     content: '';
@@ -621,7 +627,10 @@
 </footer>
 
 <script>
-  // Custom cursor
+  // Custom cursor — only run on devices that actually have a mouse
+  const isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+
+  if (!isTouchDevice) {
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursor-ring');
   let mx = 0, my = 0, rx = 0, ry = 0;
@@ -655,6 +664,7 @@
       ring.style.height = '36px';
     });
   });
+  } // end isTouchDevice guard
 
   // Nav scroll
   const nav = document.getElementById('navbar');
